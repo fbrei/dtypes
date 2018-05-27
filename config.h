@@ -16,6 +16,6 @@
 
 #include <stdlib.h>
 
-static const size_t DARRAY_PAGE_SIZE = 8;
+static const size_t DARRAY_PAGE_SIZE = 32;
 
 #endif /* end of include guard: CONFIG_H_ONT7XOV2 */
