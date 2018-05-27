@@ -23,7 +23,7 @@
  * This struct manages data and metadata of a dynamic array.
  */
 typedef struct _DArray {
-  void** data;        /**< The 2d array that holds the data stored as void pinters. */
+  void*** data;       /**< The 2d array that holds the data stored as void pinters. */
   size_t num_pages;   /**< The number of currently used pages. */
 } DArray;
 
@@ -46,5 +46,28 @@ DArray darray_init();
  * \param d The DArray that should be destroyed.
  */
 void darray_destroy(DArray* d);
+
+/**
+ * \brief Inserts an item into the DArray.
+ *
+ * Inserts an item into the specified DArray.
+ * 
+ * \param d The Darray.
+ * \param item The item
+ * \param idx The desired index.
+ */
+void darray_insert(DArray* d, void* item, size_t idx);
+
+
+/**
+ * \brief Print the whole array.
+ *
+ * Print the whole array using a user
+ * supplied print function.
+ * 
+ * \param d The DArray
+ * \param void (*print_item)(void*)  The print funtion
+ */
+void darray_print(DArray* d, void (*print_item)(void*));
 
 #endif /* end of include guard: DARRAY_H_HVPNU9B1 */
