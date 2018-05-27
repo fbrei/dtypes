@@ -58,6 +58,16 @@ void darray_destroy(DArray* d);
  */
 void darray_insert(DArray* d, void* item, size_t idx);
 
+/**
+ * \brief Gets the item at the desired position.
+ *
+ * Retrieves an item at a given position, if possible.
+ * 
+ * \param d The DArray
+ * \param idx The desired index.
+ * \return The value if exists, or NULL
+ */
+void* darray_get(DArray* d, size_t idx);
 
 /**
  * \brief Print the whole array.

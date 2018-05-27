@@ -47,12 +47,27 @@ void darray_insert(DArray* d, void* item, size_t idx) {
   d->data[needed_page][idx % DARRAY_PAGE_SIZE] = item;
 }
 
+void* darray_get(DArray* d, size_t idx) {
+  size_t needed_page = idx / DARRAY_PAGE_SIZE;
+
+  if(needed_page > d->num_pages-1) {
+    return NULL;
+  } else {
+    return d->data[needed_page][idx % DARRAY_PAGE_SIZE];
+  }
+}
+
 void darray_print(DArray* d, void (*print_item)(void*)) {
+  printf("   ");
+  for(size_t ii = 0; ii < DARRAY_PAGE_SIZE; ii++) {
+    printf("%4d",ii);
+  }
+  printf("\n");
   for(size_t ii = 0; ii < d->num_pages; ii++) {
     printf("%d: ",ii);
     for(size_t jj = 0; jj < DARRAY_PAGE_SIZE; jj++) {
       if(d->data[ii][jj] == NULL) {
-        printf(" - ");
+        printf("   -");
       } else {
         print_item(d->data[ii][jj]);
       }
@@ -60,3 +75,4 @@ void darray_print(DArray* d, void (*print_item)(void*)) {
     printf("\n");
   }
 }
+
