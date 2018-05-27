@@ -38,10 +38,6 @@ void hset_add(HSet* h, void* item) {
   
   unsigned long real_idx = _find_idx(h,NULL,idx);
 
-  if(real_idx != idx) {
-    fprintf(stderr, "Collision!\n");
-  }
-
   darray_set(h->data,item,real_idx);
 }
 
