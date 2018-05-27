@@ -65,11 +65,11 @@ void* darray_get(DArray* d, size_t idx) {
 void darray_print(DArray* d, void (*print_item)(void*)) {
   printf("   ");
   for(size_t ii = 0; ii < DARRAY_PAGE_SIZE; ii++) {
-    printf("%4lui",ii);
+    printf("%4lu",ii);
   }
   printf("\n");
   for(size_t ii = 0; ii < d->num_pages; ii++) {
-    printf("%lui: ",ii);
+    printf("%lu: ",ii);
     for(size_t jj = 0; jj < DARRAY_PAGE_SIZE; jj++) {
       if(d->data[ii][jj] == NULL) {
         printf("   -");
