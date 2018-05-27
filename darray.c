@@ -28,7 +28,7 @@ void darray_destroy(DArray* d) {
   free(d);
 }
 
-void darray_insert(DArray* d, void* item, size_t idx) {
+void darray_set(DArray* d, void* item, size_t idx) {
   size_t needed_page = idx / DARRAY_PAGE_SIZE;
 
   if(needed_page > (d->num_pages-1)) {

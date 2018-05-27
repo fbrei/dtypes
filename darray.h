@@ -56,7 +56,7 @@ void darray_destroy(DArray* d);
  * \param item The item
  * \param idx The desired index.
  */
-void darray_insert(DArray* d, void* item, size_t idx);
+void darray_set(DArray* d, void* item, size_t idx);
 
 /**
  * \brief Gets the item at the desired position.
