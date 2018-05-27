@@ -1,14 +1,14 @@
 /**
- *	\file config.h
+ *  \file config.h
  *  \brief Contains configuration parameters.
  *
- *	This file contains configuration parameters for all
- *	the different datatypes.
+ *  This file contains configuration parameters for all
+ *  the different datatypes.
  *
- *	\date 2018/05/27
- *	\author Felix Brei
+ *  \date 2018/05/27
+ *  \author Felix Brei
  *
- *	\bug No known bugs.
+ *  \bug No known bugs.
  */
 
 #ifndef CONFIG_H_ONT7XOV2
