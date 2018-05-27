@@ -15,19 +15,16 @@
 #ifndef DARRAY_H_HVPNU9B1
 #define DARRAY_H_HVPNU9B1
 
-/**
- * \brief Brief description
- *
- * Long description
- */
-
 const size_t PAGE_SIZE = 8;
 
+/**
+ * \brief Dynamically growing array.
+ *
+ * This struct manages data and metadata of a dynamic array.
+ */
 typedef struct _DArray {
   void** data; 		    /**< The 2d array that holds the data stored as void pinters. */
   size_t num_pages; 	/**< The number of currently used pages. */
 } DArray;
-
-
 
 #endif /* end of include guard: DARRAY_H_HVPNU9B1 */
