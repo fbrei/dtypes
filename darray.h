@@ -15,7 +15,7 @@
 #ifndef DARRAY_H_HVPNU9B1
 #define DARRAY_H_HVPNU9B1
 
-const size_t PAGE_SIZE = 8;
+#include "config.h"
 
 /**
  * \brief Dynamically growing array.
@@ -26,5 +26,25 @@ typedef struct _DArray {
   void** data; 		    /**< The 2d array that holds the data stored as void pinters. */
   size_t num_pages; 	/**< The number of currently used pages. */
 } DArray;
+
+
+/**
+ * \brief Creates a DArray struct.
+ *
+ * Creates a DArray struct and initializes data array.
+ * 
+ * \return The initialized DArray
+ */
+DArray darray_init();
+
+
+/**
+ * \brief Destroys a DArray
+ *
+ * Destroys a DArray while taking care of memory allocation.
+ * 
+ * \param d The DArray that should be destroyed.
+ */
+void darray_destroy(DArray* d);
 
 #endif /* end of include guard: DARRAY_H_HVPNU9B1 */
