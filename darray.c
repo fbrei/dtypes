@@ -2,14 +2,18 @@
 #include "config.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 
-DArray darray_init() {
+DArray* darray_init() {
 
-  DArray d = { .num_pages = 1, .data = malloc(sizeof(void**)) };
-  d.data[0] = malloc(DARRAY_PAGE_SIZE * sizeof(void*));
+  DArray* d = malloc(sizeof(DArray));
+
+  d->num_pages = 1;
+  d->data = malloc(sizeof(void**));
+  d->data[0] = malloc(DARRAY_PAGE_SIZE * sizeof(void*));
 
   for(size_t ii = 0; ii < DARRAY_PAGE_SIZE; ii++) {
-    d.data[0][ii] = NULL;
+    d->data[0][ii] = NULL;
   }
 
   return d;
@@ -21,6 +25,7 @@ void darray_destroy(DArray* d) {
     free(d->data[ii]);
   }
   free(d->data);
+  free(d);
 }
 
 void darray_insert(DArray* d, void* item, size_t idx) {

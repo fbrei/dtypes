@@ -35,7 +35,7 @@ typedef struct _DArray {
  * 
  * \return The initialized DArray
  */
-DArray darray_init();
+DArray* darray_init();
 
 
 /**
