@@ -23,6 +23,7 @@
 typedef struct _HSet {
   DArray* data;                   /**< The actual data */
   unsigned long (*hash)(void*);   /**< Calculates the hash of an item */
+  unsigned int (*equals)(void*,void*);
 } HSet;
 
 /**
@@ -31,9 +32,10 @@ typedef struct _HSet {
  * Creates and initializes a hash set
  * 
  * \param (*hash)(void*) The hash function
+ * \param (*equals)(void*,void*) The equals function
  * \return A ready to use hash set
  */
-HSet* hset_init(unsigned long (*hash)(void*));
+HSet* hset_init(unsigned long (*hash)(void*), unsigned int (*equals)(void*,void*));
 
 /**
  * \brief Destroys a hash set
@@ -64,5 +66,16 @@ void hset_add(HSet* h, void* item);
  * \param item The item
  */
 void hset_remove(HSet* h, void* item);
+
+/**
+ * \brief Checks if a hash set contains a certain item.
+ *
+ * Checks if a hash set contains a certain item.
+ * 
+ * \param *h The hash set
+ * \param *item The item
+ * \return The index of the item, -1 if not found.
+ */
+long hset_contains(HSet *h, void *item);
 
 #endif /* end of include guard: SET_H_OHIG380N */
