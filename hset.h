@@ -21,9 +21,10 @@
  * The struct that holds the data together with a hash function.
  */
 typedef struct _HSet {
-  DArray* data;                   /**< The actual data */
-  unsigned long (*hash)(void*);   /**< Calculates the hash of an item */
-  unsigned int (*equals)(void*,void*);
+  DArray* data;                           /**< The actual data */
+  unsigned long (*hash)(void*);           /**< Calculates the hash of an item */
+  unsigned int (*equals)(void*,void*);    /**< Checks whether two items are actually equal (should check for NULL) */
+  void* marker;                           /** Special value that marks entries as deleted. */
 } HSet;
 
 /**
@@ -77,5 +78,15 @@ void hset_remove(HSet* h, void* item);
  * \return The index of the item, -1 if not found.
  */
 long hset_contains(HSet *h, void *item);
+
+/**
+ * \brief Prints the contents of the set in a neat fashion.
+ *
+ * Prints the contents of the set in a neat fashion.
+ * 
+ * \param *h The set
+ * \param (*print_elem)(void*) The print function for one element.
+ */
+void hset_print(HSet *h, void (*print_elem)(void*));
 
 #endif /* end of include guard: SET_H_OHIG380N */
