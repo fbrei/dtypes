@@ -24,7 +24,9 @@ typedef struct _HSet {
   DArray* data;                           /**< The actual data */
   unsigned long (*hash)(void*);           /**< Calculates the hash of an item */
   unsigned int (*equals)(void*,void*);    /**< Checks whether two items are actually equal (should check for NULL) */
-  void* marker;                           /** Special value that marks entries as deleted. */
+  void* marker;                           /**< Special value that marks entries as deleted. */
+  size_t num_items;                       /**< Number of items currently inside. */
+  size_t max_items;                       /**< Maximum number of slots available (grows dynamically) */
 } HSet;
 
 /**

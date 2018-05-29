@@ -18,4 +18,6 @@
 
 static const size_t DARRAY_PAGE_SIZE = 1013;
 
+static const double HSET_MAX_RATIO = 0.7;
+
 #endif /* end of include guard: CONFIG_H_ONT7XOV2 */
