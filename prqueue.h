@@ -23,11 +23,12 @@
  * backed by a DArray.
  */
 typedef struct _PrQueue {
-  DArray* data;		              /**< Array of pointers that point to the actual objects */
+  DArray* data;		                        /**< Array of pointers that point to the actual objects */
 
-  int (*compare)(void*,void*); 	/**< The comparison function, should return -1, 0, or 1 for <, =, or > */
+  int (*compare)(void*,void*); 	          /**< The comparison function, should return -1, 0, or 1 for <, =, or > (considering priority) */
+  unsigned int (*equals)(void*,void*);    /**< Checks whether two elements are equal (not necessarily in priority) */
 
-  int _highest_idx;             /**< Stores the highest used index. */
+  int _highest_idx;                        /**< Stores the highest used index. */
 } PrQueue;
 
 
@@ -83,5 +84,39 @@ void prqueue_insert(PrQueue* pq, void* item);
  * \return A pointer to the front element.
  */
 void* prqueue_pop(PrQueue* pq);
+
+/**
+ * \brief Replaces the first instance of old_item with new_item
+ *
+ * Replaces the first instance of old_item with new_item
+ * 
+ * \param *pq The priority queue
+ * \param *new_item The new item
+ * \param *old_item The old item
+ */
+void prqueue_replace(PrQueue *pq, void *old_item, void *new_item);
+
+/**
+ * \brief Replaces all instances of old_item with new_item
+ *
+ *  Replaces all instances of old_item with new_item
+ * 
+ * \param *pq The priority queue
+ * \param *new_item The new item
+ * \param *old_item The old item
+ */
+void prqueue_replace_all(PrQueue *pq, void *old_item, void *new_item);
+
+
+/**
+ * \brief Checks if an item exists in the queue.
+ *
+ * Checks if an item exists in the queue.
+ * 
+ * \param *pq The priority queue
+ * \param *item The item to look for
+ * \return 1 if it is in the queue, 0 otherwise
+ */
+unsigned int prqueue_contains(PrQueue *pq, void *item);
 
 #endif /* end of include guard: PRQUEUE_H_P3USRWA2 */

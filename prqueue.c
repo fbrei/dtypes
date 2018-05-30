@@ -10,6 +10,7 @@ PrQueue* prqueue_init(int (*compare)(void*,void*)) {
   p->compare = compare;
   p->_highest_idx = -1;
   p->data = darray_init();
+  p->equals = NULL;
 
   return p;
 }
@@ -78,3 +79,43 @@ void* prqueue_pop(PrQueue* pq) {
 void prqueue_print(PrQueue* pq, void (*print_elem)(void*)) {
   darray_print(pq->data, print_elem);
 } 
+
+void _prqueue_replace(PrQueue *pq, void *old_item, void *new_item, int all) {
+  if(pq->equals == NULL) {
+    fprintf(stderr, "Please supply an equals function\n");
+    return;
+  }
+
+  for(size_t ii = 0; ii <= pq->_highest_idx; ii++) {
+    void *tmp = darray_get(pq->data,ii);
+    if(pq->equals(tmp, old_item) != 0) {
+      darray_set(pq->data,new_item,ii);
+
+      int cmp = pq->compare(new_item,tmp);
+      if(cmp < 0) {
+        _reheap_up(pq,ii);
+      } else if(cmp > 0) {
+        _reheap_down(pq,ii);
+      }
+
+      if(!all) return;
+    }
+  }
+}
+
+void prqueue_replace(PrQueue *pq, void *old_item, void *new_item) {
+  _prqueue_replace(pq,old_item,new_item,0);
+}
+
+void prqueue_replace_all(PrQueue *pq, void *old_item, void *new_item) {
+  _prqueue_replace(pq,old_item,new_item,1);
+}
+
+unsigned int prqueue_contains(PrQueue *pq, void *item) {
+  for(size_t ii = 0; ii <= pq->_highest_idx; ii++) {
+    if(pq->equals(darray_get(pq->data,ii),item) != 0) {
+      return 1;
+    }
+  }
+  return 0;
+}
