@@ -78,7 +78,7 @@ void hset_remove(HSet* h, void* item) {
     tmp = darray_get(h->data, real_idx);
     if(tmp == NULL) {
       return;
-    } else if(h->equals(tmp,item) == 0) {
+    } else if(h->equals(tmp,item) == 1) {
       darray_set(h->data,h->marker,real_idx);
       return;
     } else {
@@ -100,7 +100,7 @@ long hset_contains(HSet *h, void *item) {
       return -1;
     } else if(tmp == h->marker) {
       real_idx = (real_idx + 1) % h->max_items;
-    } else if(h->equals(tmp,item) == 0) {
+    } else if(h->equals(tmp,item) == 1) {
       return real_idx;
     } else {
       real_idx = (real_idx + 1) % h->max_items;
