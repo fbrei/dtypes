@@ -119,3 +119,19 @@ unsigned int prqueue_contains(PrQueue *pq, void *item) {
   }
   return 0;
 }
+
+void* prqueue_get(PrQueue *pq, void *item) {
+
+  if(pq->_highest_idx < 0) {
+    return NULL;
+  }
+
+  for(size_t ii = 0; ii <= pq->_highest_idx; ii++) {
+    void *tmp = darray_get(pq->data,ii);
+
+    if(pq->equals(tmp,item)) {
+      return tmp;
+    }
+  }
+  return NULL;
+}

@@ -119,4 +119,16 @@ void prqueue_replace_all(PrQueue *pq, void *old_item, void *new_item);
  */
 unsigned int prqueue_contains(PrQueue *pq, void *item);
 
+/**
+ * \brief Finds an element with a given specification.
+ *
+ * Returns a pointer to the first element that appears to be
+ * equal to the specified one for further investigation.
+ * 
+ * \param *pq The priority queue
+ * \param *item The item to look for
+ * \return Pointer to the first item found.
+ */
+void* prqueue_get(PrQueue *pq, void *item);
+
 #endif /* end of include guard: PRQUEUE_H_P3USRWA2 */
