@@ -113,14 +113,5 @@ long hset_contains(HSet *h, void *item) {
 }
 
 void hset_print(HSet *h, void (*print_elem)(void*)) {
-  void _print_element(void* v) {
-    if(v == NULL) {
-      printf("   -");
-    } else if(v == h->marker) {
-      printf("   x");
-    } else {
-      print_elem(v);
-    }
-  }
-  darray_print(h->data, _print_element);
+  darray_print(h->data, print_elem);
 }
