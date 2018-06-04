@@ -37,11 +37,11 @@ void _reheap_up(PrQueue* pq, int idx) {
   }
 }
 
-void _reheap_down(PrQueue* pq, int idx) {
-  int chosen = idx;
+void _reheap_down(PrQueue* pq, size_t idx) {
+  size_t chosen = idx;
   
-  int left_child = 2*chosen + 1;
-  int right_child = 2*chosen + 2;
+  size_t left_child = 2*chosen + 1;
+  size_t right_child = 2*chosen + 2;
 
   if(left_child < pq->num_items && pq->compare(darray_get(pq->data,left_child), darray_get(pq->data,chosen)) < 0) {
     chosen = left_child;
