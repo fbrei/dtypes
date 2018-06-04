@@ -28,7 +28,7 @@ typedef struct _PrQueue {
   int (*compare)(void*,void*); 	          /**< The comparison function, should return -1, 0, or 1 for <, =, or > (considering priority) */
   unsigned int (*equals)(void*,void*);    /**< Checks whether two elements are equal (not necessarily in priority) */
 
-  int _highest_idx;                        /**< Stores the highest used index. */
+  size_t num_items;                       /**< Stores the number of items currently in the queue */
 } PrQueue;
 
 

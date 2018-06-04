@@ -8,7 +8,7 @@ PrQueue* prqueue_init(int (*compare)(void*,void*)) {
   PrQueue* p = malloc(sizeof(PrQueue));
   
   p->compare = compare;
-  p->_highest_idx = -1;
+  p->num_items = 0;
   p->data = darray_init();
   p->equals = NULL;
 
@@ -43,10 +43,10 @@ void _reheap_down(PrQueue* pq, int idx) {
   int left_child = 2*chosen + 1;
   int right_child = 2*chosen + 2;
 
-  if(left_child <= pq->_highest_idx && pq->compare(darray_get(pq->data,left_child), darray_get(pq->data,chosen)) < 0) {
+  if(left_child < pq->num_items && pq->compare(darray_get(pq->data,left_child), darray_get(pq->data,chosen)) < 0) {
     chosen = left_child;
   }
-  if(right_child <= pq->_highest_idx && pq->compare(darray_get(pq->data,right_child), darray_get(pq->data,chosen)) < 0) {
+  if(right_child < pq->num_items && pq->compare(darray_get(pq->data,right_child), darray_get(pq->data,chosen)) < 0) {
     chosen = right_child;
   }
 
@@ -58,18 +58,18 @@ void _reheap_down(PrQueue* pq, int idx) {
 
 
 void prqueue_insert(PrQueue* pq, void* item) {
-  pq->_highest_idx++;
+  darray_set(pq->data, item, pq->num_items);
+  _reheap_up(pq, pq->num_items);
 
-  darray_set(pq->data, item, pq->_highest_idx);
-  _reheap_up(pq, pq->_highest_idx);
+  pq->num_items++;
 }
 
 void* prqueue_pop(PrQueue* pq) {
   void* out = darray_get(pq->data,0);
 
-  darray_set(pq->data,darray_get(pq->data,pq->_highest_idx),0);
-  darray_set(pq->data,NULL,pq->_highest_idx);
-  pq->_highest_idx--;
+  pq->num_items--;
+  darray_set(pq->data,darray_get(pq->data,pq->num_items),0);
+  darray_set(pq->data,NULL,pq->num_items);
 
   _reheap_down(pq,0);
 
@@ -86,7 +86,7 @@ void _prqueue_replace(PrQueue *pq, void *old_item, void *new_item, int all) {
     return;
   }
 
-  for(size_t ii = 0; ii <= pq->_highest_idx; ii++) {
+  for(size_t ii = 0; ii < pq->num_items; ii++) {
     void *tmp = darray_get(pq->data,ii);
     if(pq->equals(tmp, old_item) != 0) {
       darray_set(pq->data,new_item,ii);
@@ -112,7 +112,7 @@ void prqueue_replace_all(PrQueue *pq, void *old_item, void *new_item) {
 }
 
 unsigned int prqueue_contains(PrQueue *pq, void *item) {
-  for(size_t ii = 0; ii <= pq->_highest_idx; ii++) {
+  for(size_t ii = 0; ii < pq->num_items; ii++) {
     if(pq->equals(darray_get(pq->data,ii),item) != 0) {
       return 1;
     }
@@ -122,11 +122,11 @@ unsigned int prqueue_contains(PrQueue *pq, void *item) {
 
 void* prqueue_get(PrQueue *pq, void *item) {
 
-  if(pq->_highest_idx < 0) {
+  if(pq->num_items == 0) {
     return NULL;
   }
 
-  for(size_t ii = 0; ii <= pq->_highest_idx; ii++) {
+  for(size_t ii = 0; ii < pq->num_items; ii++) {
     void *tmp = darray_get(pq->data,ii);
 
     if(pq->equals(tmp,item)) {
