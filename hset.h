@@ -91,4 +91,16 @@ long hset_contains(HSet *h, void *item);
  */
 void hset_print(HSet *h, void (*print_elem)(void*));
 
+
+/**
+ * \brief Apply a function to all elements.
+ *
+ * Takes a function and applies it to every
+ * single element in the set.
+ * 
+ * \param *h The set
+ * \param (*f)(void*) The function
+ */
+void hset_apply(HSet *h, void (*f)(void*));
+
 #endif /* end of include guard: SET_H_OHIG380N */

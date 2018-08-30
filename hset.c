@@ -61,6 +61,9 @@ void hset_add(HSet* h, void* item) {
       h->num_items++;
       return;
     }
+    if(h->equals(tmp, item)) {
+      return;
+    }
     real_idx = (real_idx + 1) % h->max_items;
     if(real_idx == idx) {
       return;
@@ -114,4 +117,18 @@ long hset_contains(HSet *h, void *item) {
 
 void hset_print(HSet *h, void (*print_elem)(void*)) {
   darray_print(h->data, print_elem);
+}
+
+void hset_apply(HSet *h, void (*f)(void*)) {
+  size_t num_found = 0;
+  for(size_t ii = 0; ii < h->max_items; ii++) {
+    void *item = darray_get(h->data,ii);
+    if(item != NULL && item != h->marker) {
+      num_found++;
+      f(item);
+    }
+    if(num_found >= h->num_items) {
+      break;
+    }
+  }
 }
