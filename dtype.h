@@ -16,5 +16,6 @@
 #include "darray.h"
 #include "prqueue.h"
 #include "hset.h"
+#include "graph.h"
 
 #endif /* end of include guard: DTYPE_H_F3IFONJS */
