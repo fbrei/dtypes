@@ -58,7 +58,7 @@ void* darray_get(DArray* d, size_t idx) {
   if(needed_page > d->num_pages-1) {
     return NULL;
   } else {
-    return d->data[needed_page][idx % DARRAY_PAGE_SIZE];
+    return (d->data[needed_page]) ? d->data[needed_page][idx % DARRAY_PAGE_SIZE] : NULL;
   }
 }
 
