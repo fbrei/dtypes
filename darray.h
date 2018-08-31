@@ -25,6 +25,8 @@
 typedef struct _DArray {
   void*** data;       /**< The 2d array that holds the data stored as void pinters. */
   size_t num_pages;   /**< The number of currently used pages. */
+
+  size_t num_items;   /**< The number of items in the array (non-NULL) */
 } DArray;
 
 

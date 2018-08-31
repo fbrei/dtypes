@@ -9,6 +9,7 @@ DArray* darray_init() {
   DArray* d = malloc(sizeof(DArray));
 
   d->num_pages = 1;
+  d->num_items = 0;
   d->data = malloc(sizeof(void**));
   d->data[0] = malloc(DARRAY_PAGE_SIZE * sizeof(void*));
 
