@@ -23,7 +23,8 @@
  */
 typedef struct _Graph {
   DArray* node_list;
-  size_t num_nodes;
+
+  DArray* connections;
 
   unsigned short is_directed;  /**<< Stores whether the graph is directed. */
 } Graph;
@@ -61,5 +62,26 @@ void graph_destroy(Graph* g);
  * \param *node The node
  */
 void graph_add(Graph *g, void *node);
+
+/**
+ * \brief Brief description
+ *
+ * Long description
+ * 
+ * \param *g 
+ * \param *first_node 
+ * \param *second_node 
+ */
+void graph_connect(Graph *g, void *first_node, void *second_node);
+
+/**
+ * \brief Brief description
+ *
+ * Long description
+ * 
+ * \param *g 
+ * \param (print_elem)(void*) 
+ */
+void graph_print(Graph *g, void (print_elem)(void*));
 
 #endif /* end of include guard: GRAPH_H_YQFBHZUT */

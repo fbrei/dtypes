@@ -22,8 +22,22 @@ DArray* darray_init() {
 }
 
 void darray_destroy(DArray* d) {
+
   for(size_t ii = 0; ii < d->num_pages; ii++) {
     free(d->data[ii]);
+  }
+  free(d->data);
+  free(d);
+}
+
+void darray_destroy_recursive(DArray* d, void (*destructor)(void*)) {
+
+  for(size_t ii = 0; ii < d->num_pages; ii++) {
+    if(destructor == NULL) {
+      free(d->data[ii]);
+    } else {
+      destructor(d->data[ii]);
+    }
   }
   free(d->data);
   free(d);
