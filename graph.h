@@ -17,21 +17,24 @@
 #include "darray.h"
 
 
+/**
+ * Defines allowed properties for a graph
+ */
 enum GRAPH_PROP {
-  GRAPH_DIRECTED,
-  GRAPH_UNDIRECTED
+  GRAPH_DIRECTED,   /**< Means that the graph should be treated as a directed graph. */
+  GRAPH_UNDIRECTED  /**< The graph is undirected, meaning edges can be traversed both ways. */
 };
 
 
 /**
- * \brief Brief description
+ * \brief Holds data relevant to describe a graph structure.
  *
- * Long description
+ * Stores edges and vertices and some properties that make up
+ * a graph data structure.
  */
 typedef struct _Graph {
-  DArray* node_list;
-
-  DArray* edges;
+  DArray* node_list;            /**<< A dynamic array holding the nodes of the graph */
+  DArray* edges;                /**<< Connectivity matrix implemented as 2D dynamic array */
 
   enum GRAPH_PROP is_directed;  /**<< Stores whether the graph is directed. */
 } Graph;
@@ -72,24 +75,28 @@ void graph_destroy(Graph* g, void (*destructor)(void*));
 void graph_add(Graph *g, void *node);
 
 /**
- * \brief Brief description
+ * \brief Connect to nodes in a graph and assign a weight.
  *
- * Long description
+ * Works by adding the weight of the edge to the connectivity matrix
+ * where the row index corresponds to the index of the first node
+ * in the node list and the coloumn index accordingly for the
+ * second node.
  * 
- * \param *g 
- * \param *first_node 
- * \param *second_node 
- * \param edge_weight 
+ * \param *g The graph that holds the nodes
+ * \param *first_node  The first node (origin)
+ * \param *second_node The second node (source)
+ * \param edge_weight  The weight of the edge. Set 0 to effectively remove the edge.
  */
 void graph_connect(Graph *g, void *first_node, void *second_node, double edge_weight);
 
 /**
- * \brief Brief description
+ * \brief Prints a strongly simplified version of the graph 
  *
- * Long description
+ * Iterates over all nodes and prints them along with their direct
+ * successors and the edge weights between them
  * 
- * \param *g 
- * \param (print_elem)(void*) 
+ * \param *g The graph
+ * \param (print_elem)(void*) Function that prints the node
  */
 void graph_print(Graph *g, void (print_elem)(void*));
 
