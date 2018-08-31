@@ -21,23 +21,25 @@ DArray* darray_init() {
 
 }
 
-void darray_destroy(DArray* d) {
 
+void darray_destroy(DArray* d, void (*destructor)(void*)) {
+
+  size_t num_found = 0;
   for(size_t ii = 0; ii < d->num_pages; ii++) {
-    free(d->data[ii]);
-  }
-  free(d->data);
-  free(d);
-}
-
-void darray_destroy_recursive(DArray* d, void (*destructor)(void*)) {
-
-  for(size_t ii = 0; ii < d->num_pages; ii++) {
-    if(destructor == NULL) {
-      free(d->data[ii]);
-    } else {
-      destructor(d->data[ii]);
+    for(size_t jj = 0; jj < DARRAY_PAGE_SIZE; jj++) {
+      if(d->data[ii][jj] != NULL) {
+        if(destructor == NULL) {
+          free(d->data[ii][jj]);
+        } else {
+          destructor(d->data[ii][jj]);
+        }
+        num_found++;
+      }
+      if(num_found == d->num_items) {
+        break;
+      }
     }
+    free(d->data[ii]);
   }
   free(d->data);
   free(d);

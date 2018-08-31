@@ -46,18 +46,9 @@ DArray* darray_init();
  * Destroys a DArray while taking care of memory allocation.
  * 
  * \param d The DArray that should be destroyed.
- */
-void darray_destroy(DArray* d);
-
-/**
- * \brief Destroys a DArray
- *
- * Destroys a DArray while taking care of memory allocation.
- * 
- * \param d The DArray that should be destroyed.
  * \param (*destructor)(void*) An optional destructor function, pass NULL for default free
  */
-void darray_destroy_recursive(DArray* d, void (*destructor)(void*));
+void darray_destroy(DArray* d, void (*destructor)(void*));
 
 /**
  * \brief Inserts an item into the DArray.

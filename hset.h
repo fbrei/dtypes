@@ -46,8 +46,9 @@ HSet* hset_init(unsigned long (*hash)(void*), unsigned int (*equals)(void*,void*
  * Destroy a given hash set completely.
  * 
  * \param h The hashset
+ * \param (*destructor)(void*) An optional destructor, NULL means to use free
  */
-void hset_destroy(HSet* h);
+void hset_destroy(HSet* h, void (*destructor)(void*));
 
 /**
  * \brief Adds an item to a hash set.
@@ -79,7 +80,7 @@ void hset_remove(HSet* h, void* item);
  * \param *item The item
  * \return The index of the item, -1 if not found.
  */
-long hset_contains(HSet *h, void *item);
+size_t hset_contains(HSet *h, void *item);
 
 /**
  * \brief Prints the contents of the set in a neat fashion.

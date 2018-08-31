@@ -7,15 +7,21 @@ Graph* graph_init(unsigned short is_directed) {
 
   tmp->is_directed = is_directed;
   tmp->node_list = darray_init();
-  tmp->connections = darray_init();
+  tmp->edges = darray_init();
 
   return tmp;
 }
 
 
-void graph_destroy(Graph *g) {
-  darray_destroy(g->node_list);
-  darray_destroy_recursive(g->connections, darray_destroy);
+void graph_destroy(Graph* g, void (*destructor)(void*)) {
+  darray_destroy(g->node_list, destructor);
+  for(size_t ii = 0; ii < g->edges->num_pages * DARRAY_PAGE_SIZE; ii++) {
+    void *tmp = darray_get(g->edges, ii);
+    if(tmp != NULL) {
+      darray_destroy(tmp, NULL);
+    }
+  }
+  darray_destroy(g->edges, NULL);
   free(g);
 }
 
@@ -34,9 +40,10 @@ void graph_connect(Graph *g, void *first_node, void *second_node) {
   long first_idx = darray_find(g->node_list, first_node);
   long second_idx = darray_find(g->node_list, second_node);
 
-  void* tmp = darray_get(g->connections, first_idx);
+  void* tmp = darray_get(g->edges, first_idx);
   if(tmp == NULL) {
     tmp = darray_init();
+    darray_set(g->edges, tmp, first_idx);
   }
 
   short *one = malloc(sizeof(short));

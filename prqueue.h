@@ -49,8 +49,9 @@ PrQueue* prqueue_init(int (*compare)(void*,void*));
  * Frees the memory that is occupied by a queue
  * 
  * \param pq The queue that should be destroyed.
+ * \param (*destructor)(void*) An optional destructor function, pass NULL for default free
  */
-void prqueue_destroy(PrQueue* pq);
+void prqueue_destroy(PrQueue* pq, void (*destructor)(void*));
 
 /**
  * \brief Prints all elements to the screen

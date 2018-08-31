@@ -15,8 +15,8 @@ PrQueue* prqueue_init(int (*compare)(void*,void*)) {
   return p;
 }
 
-void prqueue_destroy(PrQueue* pq) {
-  darray_destroy(pq->data);
+void prqueue_destroy(PrQueue* pq, void (*destructor)(void*)) {
+  darray_destroy(pq->data, destructor);
   free(pq);
 }
 

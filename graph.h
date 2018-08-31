@@ -24,7 +24,7 @@
 typedef struct _Graph {
   DArray* node_list;
 
-  DArray* connections;
+  DArray* edges;
 
   unsigned short is_directed;  /**<< Stores whether the graph is directed. */
 } Graph;
@@ -48,8 +48,9 @@ Graph* graph_init(unsigned short is_directed);
  * nodes in the graph!
  * 
  * \param g The graph to be destroyed
+ * \param (*destructor)(void*) An optional destructor function, pass NULL for default free
  */
-void graph_destroy(Graph* g);
+void graph_destroy(Graph* g, void (*destructor)(void*));
 
 
 /**
