@@ -1,4 +1,5 @@
 #include "graph.h"
+#include <stdio.h>
 
 
 Graph* graph_init(unsigned short is_directed) {
@@ -19,6 +20,7 @@ void graph_destroy(Graph* g, void (*destructor)(void*)) {
     void *tmp = darray_get(g->edges, ii);
     if(tmp != NULL) {
       darray_destroy(tmp, NULL);
+      darray_set(g->edges, NULL, ii);
     }
   }
   darray_destroy(g->edges, NULL);
@@ -33,6 +35,20 @@ void graph_add(Graph *g, void *node) {
 void graph_print(Graph *g, void (print_elem)(void*)) {
   for(size_t ii = 0; ii < g->node_list->num_items; ii++) {
     print_elem(darray_get(g->node_list,ii));
+    void *tmp = darray_get(g->edges, ii);
+    if(tmp != NULL) {
+      printf(" -> ");
+      DArray* neighbors = (DArray*) tmp;
+      for(size_t jj = 0; jj < neighbors->num_pages * DARRAY_PAGE_SIZE; jj++) {
+        void *n = darray_get(neighbors, jj);
+        if(n != NULL) {
+          if(*((int*) n) == 1) {
+            print_elem(darray_get(g->node_list, jj));
+          }
+        }
+      }
+    }
+    printf("\n");
   }
 }
 
