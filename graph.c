@@ -37,12 +37,13 @@ void graph_print(Graph *g, void (print_elem)(void*)) {
     print_elem(darray_get(g->node_list,ii));
     void *tmp = darray_get(g->edges, ii);
     if(tmp != NULL) {
-      printf(" -> ");
       DArray* neighbors = (DArray*) tmp;
       for(size_t jj = 0; jj < neighbors->num_pages * DARRAY_PAGE_SIZE; jj++) {
         void *n = darray_get(neighbors, jj);
         if(n != NULL) {
-          if(*((int*) n) == 1) {
+          double w = *((double*) n);
+          if(w != 0.0) {
+            printf(" -- %4.2lf --> ", w);
             print_elem(darray_get(g->node_list, jj));
           }
         }
@@ -52,7 +53,7 @@ void graph_print(Graph *g, void (print_elem)(void*)) {
   }
 }
 
-void graph_connect(Graph *g, void *first_node, void *second_node) {
+void graph_connect(Graph *g, void *first_node, void *second_node, double edge_weight) {
   long first_idx = darray_find(g->node_list, first_node);
   long second_idx = darray_find(g->node_list, second_node);
 
@@ -62,7 +63,7 @@ void graph_connect(Graph *g, void *first_node, void *second_node) {
     darray_set(g->edges, tmp, first_idx);
   }
 
-  short *one = malloc(sizeof(short));
-  *one = 1;
-  darray_set(tmp, one, second_idx);
+  double *weight = malloc(sizeof(double));
+  *weight = edge_weight;
+  darray_set(tmp, weight, second_idx);
 }

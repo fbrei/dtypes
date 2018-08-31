@@ -79,8 +79,9 @@ void graph_add(Graph *g, void *node);
  * \param *g 
  * \param *first_node 
  * \param *second_node 
+ * \param edge_weight 
  */
-void graph_connect(Graph *g, void *first_node, void *second_node);
+void graph_connect(Graph *g, void *first_node, void *second_node, double edge_weight);
 
 /**
  * \brief Brief description
