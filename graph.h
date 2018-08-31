@@ -16,6 +16,13 @@
 
 #include "darray.h"
 
+
+enum GRAPH_PROP {
+  GRAPH_DIRECTED,
+  GRAPH_UNDIRECTED
+};
+
+
 /**
  * \brief Brief description
  *
@@ -26,7 +33,7 @@ typedef struct _Graph {
 
   DArray* edges;
 
-  unsigned short is_directed;  /**<< Stores whether the graph is directed. */
+  enum GRAPH_PROP is_directed;  /**<< Stores whether the graph is directed. */
 } Graph;
 
 
@@ -38,7 +45,7 @@ typedef struct _Graph {
  * \param is_directed 1 if graph is directed, 0 if not
  * \return Pointer to a graph object
  */
-Graph* graph_init(unsigned short is_directed);
+Graph* graph_init(enum GRAPH_PROP is_directed);
 
 /**
  * \brief Frees all memory allocated by a graph.

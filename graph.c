@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 
-Graph* graph_init(unsigned short is_directed) {
+Graph* graph_init(enum GRAPH_PROP is_directed) {
 
   Graph *tmp = malloc(sizeof(Graph));
 
