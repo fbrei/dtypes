@@ -80,4 +80,15 @@ void* darray_get(DArray* d, size_t idx);
  */
 void darray_print(DArray* d, void (*print_item)(void*));
 
+/**
+ * \brief Find the index of an item
+ *
+ * Searches the list to find the desired item
+ * 
+ * \param *d The dynamic array
+ * \param *item The item to be found
+ * \return The index of the item if exists, -1 otherwise
+ */
+long darray_find(DArray *d, void *item);
+
 #endif /* end of include guard: DARRAY_H_HVPNU9B1 */

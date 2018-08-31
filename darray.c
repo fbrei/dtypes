@@ -49,7 +49,15 @@ void darray_set(DArray* d, void* item, size_t idx) {
     d->num_pages = needed_page+1;
   }
 
+  void *current = d->data[needed_page][idx % DARRAY_PAGE_SIZE];
+
   d->data[needed_page][idx % DARRAY_PAGE_SIZE] = item;
+  if(current == NULL && item != NULL) {
+    d->num_items++;
+  } else if(item == NULL && current != NULL) {
+    d->num_items--;
+  }
+
 }
 
 void* darray_get(DArray* d, size_t idx) {
@@ -81,3 +89,12 @@ void darray_print(DArray* d, void (*print_item)(void*)) {
   }
 }
 
+
+long darray_find(DArray *d, void *item) {
+  for(size_t ii = 0; ii < d->num_pages * DARRAY_PAGE_SIZE; ii++) {
+    if(darray_get(d,ii) == item) {
+      return ii;
+    }
+  }
+  return -1;
+}
