@@ -64,7 +64,7 @@ void prqueue_destroy(PrQueue* pq, void (*destructor)(void*));
 void prqueue_print(PrQueue* pq, void (*print_elem)(void*));
 
 /**
- * \brief Inserts an element into the queue
+ * \brief Adds an element to the queue
  *
  * Inserts an element into the queue in the right place,
  * determined by the compare method.
@@ -72,7 +72,7 @@ void prqueue_print(PrQueue* pq, void (*print_elem)(void*));
  * \param pq The queue.
  * \param item The item.
  */
-void prqueue_insert(PrQueue* pq, void* item);
+void prqueue_add(PrQueue* pq, void* item);
 
 /**
  * \brief Removes the front element.

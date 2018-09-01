@@ -57,7 +57,7 @@ void _reheap_down(PrQueue* pq, size_t idx) {
 }
 
 
-void prqueue_insert(PrQueue* pq, void* item) {
+void prqueue_add(PrQueue* pq, void* item) {
   darray_set(pq->data, item, pq->num_items);
   _reheap_up(pq, pq->num_items);
 
