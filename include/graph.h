@@ -90,6 +90,18 @@ void graph_add(Graph *g, void *node);
 void graph_connect(Graph *g, void *first_node, void *second_node, double edge_weight);
 
 /**
+ * \brief Finds all neighbors of a given node
+ *
+ * Looks up the index of the node in the node list
+ * and returns the matching row of the matrix
+ * 
+ * \param *g The graph
+ * \param *node The node whose neighbors we seek
+ * \return DArray containing all neighbors
+ */
+DArray* graph_get_neighbors(Graph *g, void *node);
+
+/**
  * \brief Gets the weight between two edges if exists
  *
  * Looks up the weight and returns a double pointer that

@@ -52,6 +52,12 @@ void graph_print(Graph *g, void (print_elem)(void*)) {
   }
 }
 
+DArray* graph_get_neighbors(Graph *g, void *node) {
+  long idx = darray_find(g->node_list, node);
+  void *tmp = darray_get(g->edges, idx);
+  return (tmp == NULL) ? NULL : (DArray*) tmp ;
+}
+
 void graph_connect(Graph *g, void *first_node, void *second_node, double edge_weight) {
   long first_idx = darray_find(g->node_list, first_node);
   long second_idx = darray_find(g->node_list, second_node);
