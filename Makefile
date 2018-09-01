@@ -10,14 +10,14 @@ CC=gcc
 CFLAGS=-O0 -ggdb -Wall -Wextra -Wpedantic -Iinclude
 LFLAGS=-lm
 
-BASEDEPS=$(OBJ)/darray.o
+DTYPES=$(OBJ)/darray.o $(OBJ)/hset.o $(OBJ)/prqueue.o
 
-graph_test: $(OBJ)/graph.o $(OBJ)/test/graph_test.o $(BASEDEPS)
+graph_test: $(OBJ)/graph.o $(OBJ)/test/graph_test.o $(DTYPES)
 	mkdir -p $(BIN)
 	$(CC) -o $(BIN)/$@ $^ $(LFLAGS)
 	valgrind --tool=memcheck --leak-check=full $(BIN)/graph_test
 
-darray_test: $(OBJ)/darray.o $(OBJ)/test/darray_test.o $(BASEDEPS)
+darray_test: $(OBJ)/darray.o $(OBJ)/test/darray_test.o $(DTYPES)
 	mkdir -p $(BIN)
 	$(CC) -o $(BIN)/$@ $^ $(LFLAGS)
 	valgrind --tool=memcheck --leak-check=full $(BIN)/$@
