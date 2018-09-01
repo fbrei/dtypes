@@ -115,3 +115,12 @@ long darray_find(DArray *d, void *item) {
   }
   return -1;
 }
+
+void* darray_iterate(DArray *d, void *start_after) {
+  size_t idx = (start_after) ? darray_find(d, start_after) + 1 : 0;
+
+  void *tmp = NULL;
+  while(idx < DARRAY_PAGE_SIZE * d->num_pages && (tmp = darray_get(d,idx)) == NULL) idx++;
+
+  return tmp;
+}

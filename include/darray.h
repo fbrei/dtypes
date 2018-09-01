@@ -94,4 +94,17 @@ void darray_print(DArray* d, void (*print_item)(void*));
  */
 long darray_find(DArray *d, void *item);
 
+
+/**
+ * \brief Iterates over the elements in the array
+ *
+ * Loops over the element trying to find the first non-NULL
+ * element after the specified one.
+ * 
+ * \param *d The dynamic array to iterate over
+ * \param *start_after Tells the function to find the first element after this one.
+ * \return The first match, or NULL if nonexistent.
+ */
+void* darray_iterate(DArray *d, void *start_after);
+
 #endif /* end of include guard: DARRAY_H_HVPNU9B1 */
