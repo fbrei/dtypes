@@ -42,10 +42,9 @@ void graph_print(Graph *g, void (print_elem)(void*)) {
         void *n = darray_get(neighbors, jj);
         if(n != NULL) {
           double w = *((double*) n);
-          if(w != 0.0) {
-            printf(" -- %4.2lf --> ", w);
-            print_elem(darray_get(g->node_list, jj));
-          }
+          printf(" -- %4.2lf --> ", w);
+          print_elem(darray_get(g->node_list, jj));
+          printf("\n      ");
         }
       }
     }
@@ -66,4 +65,23 @@ void graph_connect(Graph *g, void *first_node, void *second_node, double edge_we
   double *weight = malloc(sizeof(double));
   *weight = edge_weight;
   darray_set(tmp, weight, second_idx);
+}
+
+double* graph_get_edge_weight(Graph *g, void *first_node, void *second_node) {
+  long first_idx = darray_find(g->node_list, first_node);
+  long second_idx = darray_find(g->node_list, second_node);
+
+  void *tmp = darray_get(g->edges, first_idx);
+
+  if(tmp != NULL) {
+    DArray* neighbors = (DArray*) tmp;
+    void *tmp_weight = darray_get(neighbors, second_idx);
+    if(tmp_weight != NULL) {
+      return (double*) tmp_weight;
+    } else {
+      return NULL;
+    }
+  } else {
+    return NULL;
+  }
 }

@@ -85,9 +85,22 @@ void graph_add(Graph *g, void *node);
  * \param *g The graph that holds the nodes
  * \param *first_node  The first node (origin)
  * \param *second_node The second node (source)
- * \param edge_weight  The weight of the edge. Set 0 to effectively remove the edge.
+ * \param edge_weight  The weight of the edge.
  */
 void graph_connect(Graph *g, void *first_node, void *second_node, double edge_weight);
+
+/**
+ * \brief Gets the weight between two edges if exists
+ *
+ * Looks up the weight and returns a double pointer that
+ * dereferences to the weight or NULL if there is no edge
+ * 
+ * \param *g 
+ * \param *first_node  The first node (origin)
+ * \param *second_node The second node (source)
+ * \return Pointer to the edge weight, NULL if there is no edge
+ */
+double* graph_get_edge_weight(Graph *g, void *first_node, void *second_node);
 
 /**
  * \brief Prints a strongly simplified version of the graph 
