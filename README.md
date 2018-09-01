@@ -19,6 +19,6 @@ work in progress, not to be used yet.
 
 ----
 
-For all API methods I chose names that I would expect. I tried to be as consistent as possible, but I cannot guarantee that I made some errors here and there. For example:
+For all API methods I chose names that I would expect. I tried to be as consistent as possible, but I cannot guarantee that I didn't make some errors here and there. For example:
 
 All data structures have a *module*_init method. They all can be destroyed using *module*_destroy, always taking two arguments: the data structure itself and an optional destructor for the elements, accepting NULL as an indicator to use builtin free. Setters with an index are called *module*_set, setters without index are called *module*_add. And many more ...
