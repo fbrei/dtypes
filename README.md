@@ -15,7 +15,7 @@ A priority queue. You have to provide a compare_to method that returns a signed 
 
 ## Graph
 
-work in progress, not to be used yet.
+Contains everything that is needed for A*. I currently implemented as few methods as necessary while trying to keep the ones that I did implement as generic as possible.
 
 ----
 
