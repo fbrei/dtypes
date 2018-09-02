@@ -58,7 +58,7 @@ Graph* graph_init(enum GRAPH_PROP is_directed);
  * nodes in the graph!
  * 
  * \param g The graph to be destroyed
- * \param (*destructor)(void*) An optional destructor function, pass NULL for default free
+ * \param (*destructor)(void*) An optional destructor function. NULL means not to use free
  */
 void graph_destroy(Graph* g, void (*destructor)(void*));
 

@@ -19,7 +19,7 @@ void graph_destroy(Graph* g, void (*destructor)(void*)) {
   for(size_t ii = 0; ii < g->edges->num_pages * DARRAY_PAGE_SIZE; ii++) {
     void *tmp = darray_get(g->edges, ii);
     if(tmp != NULL) {
-      darray_destroy(tmp, NULL);
+      darray_destroy(tmp, free);
       darray_set(g->edges, NULL, ii);
     }
   }

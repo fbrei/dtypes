@@ -28,11 +28,9 @@ void darray_destroy(DArray* d, void (*destructor)(void*)) {
   for(size_t ii = 0; ii < d->num_pages; ii++) {
     for(size_t jj = 0; jj < DARRAY_PAGE_SIZE; jj++) {
       if(d->data[ii][jj] != NULL) {
-        if(destructor == NULL) {
-          free(d->data[ii][jj]);
-        } else {
+        if(destructor != NULL) {
           destructor(d->data[ii][jj]);
-        }
+        } 
         num_found++;
       }
       if(num_found == d->num_items) {

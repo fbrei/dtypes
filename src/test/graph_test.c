@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <math.h>
 
-void NOFREE(void *n) { return; }
-
 typedef struct _MapNode {
   int x; 
   int y;
@@ -147,7 +145,7 @@ int main() {
       prqueue_add(frontier, m);
     }
 
-    darray_destroy(neighbors, NOFREE);
+    darray_destroy(neighbors, NULL);
   }
 
   printf("%d\n",n_steps);
@@ -162,8 +160,8 @@ int main() {
     }
   }
 
-  prqueue_destroy(frontier, NOFREE);
-  hset_destroy(explored, NOFREE);
+  prqueue_destroy(frontier, NULL);
+  hset_destroy(explored, NULL);
 
   graph_destroy(g, node_destroy);
 

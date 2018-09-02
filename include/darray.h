@@ -46,7 +46,7 @@ DArray* darray_init();
  * Destroys a DArray while taking care of memory allocation.
  * 
  * \param d The DArray that should be destroyed.
- * \param (*destructor)(void*) An optional destructor function, pass NULL for default free
+ * \param (*destructor)(void*) An optional destructor function. NULL means not to use free
  */
 void darray_destroy(DArray* d, void (*destructor)(void*));
 
