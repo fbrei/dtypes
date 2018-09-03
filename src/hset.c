@@ -91,7 +91,7 @@ void hset_remove(HSet* h, void* item) {
 
 }
 
-size_t hset_contains(HSet *h, void *item) {
+long hset_contains(HSet *h, void *item) {
   size_t idx = h->hash(item) % h->max_items;
   size_t real_idx = idx;
   void* tmp;

@@ -80,7 +80,7 @@ void hset_remove(HSet* h, void* item);
  * \param *item The item
  * \return The index of the item, -1 if not found.
  */
-size_t hset_contains(HSet *h, void *item);
+long hset_contains(HSet *h, void *item);
 
 /**
  * \brief Prints the contents of the set in a neat fashion.
