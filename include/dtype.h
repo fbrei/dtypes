@@ -17,5 +17,6 @@
 #include "prqueue.h"
 #include "hset.h"
 #include "graph.h"
+#include "dlist.h"
 
 #endif /* end of include guard: DTYPE_H_F3IFONJS */

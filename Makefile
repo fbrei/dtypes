@@ -22,6 +22,11 @@ darray_test: $(OBJ)/darray.o $(OBJ)/test/darray_test.o $(DTYPES)
 	$(CC) -o $(BIN)/$@ $^ $(LFLAGS)
 	valgrind --tool=memcheck --leak-check=full $(BIN)/$@
 
+dlist_test: $(OBJ)/darray.o $(OBJ)/dlist.o $(OBJ)/test/dlist_test.o $(DTYPES) 
+	mkdir -p $(BIN)
+	$(CC) -o $(BIN)/$@ $^ $(LFLAGS)
+	valgrind --tool=memcheck --leak-check=full $(BIN)/$@ a b 123
+
 obj/%.o: $(SRC)/%.c tmpdirs
 	$(CC) -c -o $@ $< $(CFLAGS)
 
