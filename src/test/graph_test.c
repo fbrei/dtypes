@@ -69,7 +69,7 @@ MapNode *create_node(int x, int y) {
 
 void print_node(void *n) {
   MapNode *m = (MapNode*) n;
-  printf("(%d %d) ", m->x, m->y);
+  printf("(%d,%d)", m->x, m->y);
 }
 
 double euclid(MapNode *m1, MapNode *m2) {
@@ -106,6 +106,8 @@ int main() {
 
   graph_connect(g, m1, goal, euclid(m1,goal));
   graph_connect(g, m2, goal, euclid(m2,goal));
+
+  graph_print(g, print_node);
 
   // Let's try some A*
   

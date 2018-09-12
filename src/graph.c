@@ -33,22 +33,34 @@ void graph_add(Graph *g, void *node) {
 }
 
 void graph_print(Graph *g, void (print_elem)(void*)) {
+
+  printf("NODELIST: [");
+  void *tmp = NULL;
+  while((tmp = darray_iterate(g->node_list,tmp)) != NULL) {
+    print_elem(tmp);
+    printf(",");
+  }
+  printf("\b]\n");
+
+  printf("EDGES:\n");
   for(size_t ii = 0; ii < g->node_list->num_items; ii++) {
     print_elem(darray_get(g->node_list,ii));
+    printf(" ");
     void *tmp = darray_get(g->edges, ii);
     if(tmp != NULL) {
+      printf("[");
       DArray* neighbors = (DArray*) tmp;
       for(size_t jj = 0; jj < neighbors->num_pages * DARRAY_PAGE_SIZE; jj++) {
         void *n = darray_get(neighbors, jj);
         if(n != NULL) {
-          double w = *((double*) n);
-          printf(" -- %4.2lf --> ", w);
           print_elem(darray_get(g->node_list, jj));
-          printf("\n      ");
+          printf(",");
         }
       }
+      printf("\b]\n");
+    } else {
+      printf("-\n");
     }
-    printf("\n");
   }
 }
 
