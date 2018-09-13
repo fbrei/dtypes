@@ -18,7 +18,27 @@ HSet* hset_init(unsigned long (*hash)(void*), unsigned int (*equals)(void*, void
 }
 
 void hset_destroy(HSet* h, void (*destructor)(void*)) {
-  darray_destroy(h->data, destructor);
+  size_t num_found = 0;
+  for(size_t ii = 0; ii < h->data->num_pages; ii++) {
+    for(size_t jj = 0; jj < DARRAY_PAGE_SIZE; jj++) {
+      if(h->data->data[ii][jj] == h->marker) {
+        fprintf(stderr, "Continueing..\n");
+        continue;
+      }
+      if(h->data->data[ii][jj] != NULL) {
+        if(destructor != NULL) {
+          destructor(h->data->data[ii][jj]);
+        } 
+        num_found++;
+      }
+      if(num_found == h->num_items) {
+        break;
+      }
+    }
+    free(h->data->data[ii]);
+  }
+  free(h->data->data);
+  free(h->data);
   free(h->marker);
   free(h);
 }
