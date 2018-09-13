@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "prqueue.h"
+#include "include/prqueue.h"
 
 PrQueue* prqueue_init(int (*compare)(void*,void*)) {
 

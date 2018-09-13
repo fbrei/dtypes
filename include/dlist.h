@@ -14,7 +14,7 @@
 #ifndef DLIST_H_9UYFSIDA
 #define DLIST_H_9UYFSIDA
 
-#include "dtype.h"
+#include "include/dtype.h"
 
 /**
  * \brief Struct that holds a simple list for data storing

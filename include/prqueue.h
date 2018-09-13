@@ -14,7 +14,7 @@
 #ifndef PRQUEUE_H_P3USRWA2
 #define PRQUEUE_H_P3USRWA2
 
-#include "darray.h"
+#include "include/darray.h"
 
 /**
  * \brief Priority queue

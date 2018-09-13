@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "hset.h"
-#include "darray.h"
-#include "config.h"
+#include "include/hset.h"
+#include "include/darray.h"
+#include "include/config.h"
 
 HSet* hset_init(unsigned long (*hash)(void*), unsigned int (*equals)(void*, void*)) {
   HSet* h = malloc(sizeof(HSet));

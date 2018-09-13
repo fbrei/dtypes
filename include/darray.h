@@ -15,7 +15,7 @@
 #ifndef DARRAY_H_HVPNU9B1
 #define DARRAY_H_HVPNU9B1
 
-#include "config.h"
+#include "include/config.h"
 
 /**
  * \brief Dynamically growing array.

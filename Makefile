@@ -7,7 +7,7 @@ TEST=$(SRC)/test
 OBJTEST=$(OBJ)/test
 
 CC=gcc
-CFLAGS=-O0 -ggdb -Wall -Wextra -Wpedantic -Iinclude
+CFLAGS=-O0 -ggdb -Wall -Wextra -Wpedantic -I.
 LFLAGS=-lm
 
 DTYPES=$(OBJ)/darray.o $(OBJ)/hset.o $(OBJ)/prqueue.o
