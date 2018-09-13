@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "include/hset.h"
 #include "include/darray.h"
 #include "include/config.h"
@@ -22,7 +21,6 @@ void hset_destroy(HSet* h, void (*destructor)(void*)) {
   for(size_t ii = 0; ii < h->data->num_pages; ii++) {
     for(size_t jj = 0; jj < DARRAY_PAGE_SIZE; jj++) {
       if(h->data->data[ii][jj] == h->marker) {
-        fprintf(stderr, "Continueing..\n");
         continue;
       }
       if(h->data->data[ii][jj] != NULL) {
