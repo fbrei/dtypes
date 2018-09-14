@@ -104,4 +104,16 @@ void hset_print(HSet *h, void (*print_elem)(void*));
  */
 void hset_apply(HSet *h, void (*f)(void*));
 
+
+/**
+ * \brief Generic null hash.
+ *
+ * Use this if you do not feel like writing one
+ * yourself.
+ * 
+ * \param *item Unused parameter
+ * \return Always 0
+ */
+unsigned long NULLHASH(void *item);
+
 #endif /* end of include guard: SET_H_OHIG380N */

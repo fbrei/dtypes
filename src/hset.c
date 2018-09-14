@@ -150,3 +150,8 @@ void hset_apply(HSet *h, void (*f)(void*)) {
     }
   }
 }
+
+unsigned long NULLHASH(void *item) {
+  (void)(item);
+  return 0l;
+}
