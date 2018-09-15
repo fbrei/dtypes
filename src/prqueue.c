@@ -65,6 +65,11 @@ void prqueue_add(PrQueue* pq, void* item) {
 }
 
 void* prqueue_pop(PrQueue* pq) {
+
+  if(pq->num_items == 0) {
+    return NULL;
+  }
+
   void* out = darray_get(pq->data,0);
 
   pq->num_items--;
