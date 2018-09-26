@@ -57,6 +57,15 @@ void dlist_destroy(DList *list, void (*destructor)(void*));
  */
 void dlist_push(DList *list, void *item);
 
+/**
+ * \brief Removes an item from the list
+ *
+ * Removes the specified item from the list if present
+ * 
+ * \param *list The list to delete from
+ * \param *item The item to be deleted
+ */
+void dlist_remove(DList *list, void *item);
 
 /**
  * \brief Iterates over the elements in a DList

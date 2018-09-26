@@ -18,12 +18,13 @@ void dlist_push(DList *list, void *item) {
   list->num_items++;
 }
 
-void* dlist_iterate(DList *list, void *start_after) {
-  if(start_after) {
-    long tmp_idx = darray_find(list->data, start_after);
-    size_t idx = (tmp_idx > -1) ? tmp_idx : 0;
-    return darray_get(list->data, idx+1);
-  } else {
-    return darray_get(list->data, 0);
+void dlist_remove(DList *list, void *item) {
+  long tmp_idx = darray_find(list->data, item);
+  if(tmp_idx > -1) {
+    darray_set(list->data, NULL, tmp_idx);
   }
+}
+
+void* dlist_iterate(DList *list, void *start_after) {
+  return darray_iterate(list->data, start_after);
 }
