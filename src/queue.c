@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <assert.h>
 #include <stdio.h>
 
 #include "include/queue.h"
@@ -19,6 +20,7 @@ Queue* queue_init() {
   Queue *q = malloc(sizeof(Queue));
   q->_first = NULL;
   q->_last = NULL;
+  q->equals = NULL;
 
   return q;
 }
@@ -75,4 +77,19 @@ void queue_destroy(Queue *q) {
     q->_first = q->_first->next;
   }
   free(q);
+}
+
+unsigned int queue_contains(Queue *q, void *item) {
+  assert(q->equals != NULL);
+
+  struct __QueueItem *current = q->_first;
+
+  while(current != NULL) {
+    if(q->equals(current->data, item)) {
+      return 1;
+    }
+    current = current->next;
+  }
+
+  return 0;
 }

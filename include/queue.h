@@ -23,6 +23,7 @@ struct __QueueItem;
 typedef struct _Queue {
   struct __QueueItem *_first; 		/**< Pointer to first element */
   struct __QueueItem *_last; 		/**< Pointer to last element */
+  unsigned int (*equals)(void*,void*);    /**< Checks whether two elements are equal */
 } Queue;
 
 #endif /* end of include guard: QUEUE_H_2QBZFVYI */
@@ -78,3 +79,15 @@ void *queue_top(Queue *q);
  * \param *q The queue to be deleted
  */
 void queue_destroy(Queue *q);
+
+
+/**
+ * \brief Checks if a queue contains a specific item
+ *
+ * See brief description.
+ * 
+ * \param *q The queue to be searched
+ * \param *item The item to be looked for
+ * \return 1 if the q contains item, 0 if not
+ */
+unsigned int queue_contains(Queue *q, void *item);
