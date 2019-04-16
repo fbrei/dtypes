@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 
 #include "include/prqueue.h"
 
@@ -86,6 +87,7 @@ void prqueue_print(PrQueue* pq, void (*print_elem)(void*)) {
 } 
 
 void _prqueue_replace(PrQueue *pq, void *old_item, void *new_item, int all) {
+  assert(pq->equals != NULL);
   if(pq->equals == NULL) {
     fprintf(stderr, "Please supply an equals function\n");
     return;
@@ -117,6 +119,7 @@ void prqueue_replace_all(PrQueue *pq, void *old_item, void *new_item) {
 }
 
 unsigned int prqueue_contains(PrQueue *pq, void *item) {
+  assert(pq->equals != NULL);
   for(size_t ii = 0; ii < pq->num_items; ii++) {
     if(pq->equals(darray_get(pq->data,ii),item) != 0) {
       return 1;
@@ -126,6 +129,7 @@ unsigned int prqueue_contains(PrQueue *pq, void *item) {
 }
 
 void* prqueue_get(PrQueue *pq, void *item) {
+  assert(pq->equals != NULL);
 
   if(pq->num_items == 0) {
     return NULL;

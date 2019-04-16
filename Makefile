@@ -32,6 +32,11 @@ hset_test: $(OBJ)/hset.o $(OBJ)/darray.o $(OBJ)/test/hset_test.o $(DTYPES)
 	$(CC) -o $(BIN)/$@ $^ $(LFLAGS)
 	valgrind --tool=memcheck --leak-check=full $(BIN)/$@
 
+queue_test: $(OBJ)/queue.o $(OBJ)/test/queue_test.o $(DTYPES) 
+	mkdir -p $(BIN)
+	$(CC) -o $(BIN)/$@ $^ $(LFLAGS)
+	valgrind --tool=memcheck --leak-check=full $(BIN)/$@
+
 obj/%.o: $(SRC)/%.c tmpdirs
 	$(CC) -c -o $@ $< $(CFLAGS)
 
